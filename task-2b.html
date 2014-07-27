@@ -40,8 +40,8 @@ var AlbumsView = Backbone.View.extend({
         });
     }
     , render: function () {
+        var that = this;
         console.log('rendering: ', this.collection.pluck('collectionName'));
-        var albumListElems = _.map()
         return this;
     }
 });
