@@ -14,46 +14,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.0.3/backbone.marionette.min.js"></script>
 <script>
 
-
-var proxiedSync = Backbone.sync;
-
-
-//var Users = Backbone.Collection.extend({
-//    url: "http://backbonejs-beginner.herokuapp.com/users"       // full url is specified
-//});
-
-// Above works but this the following is cleaner: 
-
-// $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-//     options.url = 'https://itunes.apple.com/' + options.url;
-// });
-
 var Albums = Backbone.Collection.extend({
-    // url: "lookup?id=137057909&entity=album"   // using $.ajaxPrefilter(), only have to specified filename, you can ommit protocal, port, domain, and path        
-    url: "https://itunes.apple.com/lookup?id=137057909&entity=album"   // using $.ajaxPrefilter(), only have to specified filename, you can ommit protocal, port, domain, and path        
+    url: "https://itunes.apple.com/lookup?id=137057909&entity=album"
     , sync : function(method, model, options) {
         options.timeout = 10000;
         options.dataType = "jsonp";
         return Backbone.sync(method, model, options);
     }
+    , parse: function(res) {
+        console.log('in parse', res);
+        return res.results;
+    }
+    //, comparator : 'trackCount'
+    , comparator : 'collectionName'
 });
 
 var AlbumsView = Backbone.View.extend({
     initialize: function(){
-        console.log('view initializes')
+        var that = this;
         var albums = new Albums();
         albums.fetch({
             success: function (args) {
-                /* on success, content will goes here */
-                console.log('CONTENT IS HERE', args);      //<---- see v21-21-b_this-in-render.html about $el 
-
+                console.log('CONTENT IS HERE', args);
+                that.collection = args;
             }
         });
     }
-    , el: 'body'
+
     , render: function () {
-        var that = this;  //<---- see v21-21-b_this-in-render.html
-        console.log("in render() this is: ", this.$el.html());
+        var that = this;
         return this;
     }
 });
@@ -67,16 +56,22 @@ var Router = Backbone.Router.extend({
     }
 });
 
+
+// var albums = new Albums();
 var albumsView = new AlbumsView();
 var router = new Router;
 
-router.on('route:home', function() {    // listen on rout
-    albumsView.render();
-    console.log('router is home');
-})
+setTimeout(function(){
+    console.log(albumsView.collection.pluck('collectionName'));
+}, 1000);
 
-
-Backbone.history.start();
+// router.on('route:home', function() {    // listen on rout
+//     albumsView.render();
+//     console.log('router is home');
+// })
+//
+//
+// Backbone.history.start();
 
 
 
