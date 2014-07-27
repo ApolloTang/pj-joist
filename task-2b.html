@@ -14,66 +14,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.0.3/backbone.marionette.min.js"></script>
 <script>
 
-var Albums = Backbone.Collection.extend({
-    url: "https://itunes.apple.com/lookup?id=137057909&entity=album"
-    , sync : function(method, model, options) {
-        options.timeout = 10000;
-        options.dataType = "jsonp";
-        return Backbone.sync(method, model, options);
+$(document).ready(function(){
+
+    $.ajax({
+        url: 'https://itunes.apple.com/lookup?id=137057909&entity=album',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        jsonpCallback: 'jsonpCallback',
+        success: function(){
+            alert("success");
+        }
+    });
+
+    });
+
+    function jsonpCallback(data){
+        console.log(data)
     }
-    , parse: function(res) {
-        return res.results;
-    }
-    , comparator : 'collectionName'
-});
-
-var AlbumsView = Backbone.View.extend({
-    initialize: function(){
-        var that = this;
-        var albums = new Albums();
-        albums.fetch({
-            success: function (args) {
-                console.log('CONTENT IS HERE', args);
-                that.collection = args;
-                that.render();
-            }
-        });
-    }
-    , render: function () {
-        var that = this;
-        console.log('rendering: ', this.collection.pluck('collectionName'));
-        return this;
-    }
-});
-
-
-
-
-var Router = Backbone.Router.extend({
-    routes: {
-        ""         : "home",
-    }
-});
-
-
-// var albums = new Albums();
-var albumsView = new AlbumsView();
-var router = new Router;
-
-// setTimeout(function(){
-//     console.log(albumsView.collection.pluck('collectionName'));
-// }, 1000);
-
-// router.on('route:home', function() {    // listen on rout
-//     albumsView.render();
-//     console.log('router is home');
-// })
-//
-//
-// Backbone.history.start();
-
-
-
 </script>
 </body>
 </html>
