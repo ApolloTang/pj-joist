@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Miley</title>
+    </head>
+    <body>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                var Miley = function() {
+                   $.ajax({
+                       context: this
+                       , url: 'https://itunes.apple.com/lookup?id=137057909&entity=album'
+                       , dataType: 'jsonp'
+                       , success: function(data){
+                          this.albumNames = $.map(data.results, function(obj){ return obj['collectionName']; });
+                          this.albumNames.sort(this.sortAlphabetically);
+                       }
+                   });
+                };
+
+                Miley.prototype.sortAlphabetically =  function(a,b) {
+                  var aName = a.toLowerCase();
+                  var bName = b.toLowerCase(); 
+                  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+                }
+
+                // you can find Miley's albums in miley.albumNames (type array)
+                miley = new Miley();
+
+                // show results in DOM
+                var count = 0;
+                var waitForMilley = function() {
+                    var foundMiley = ( miley.albumNames && miley.albumNames.length > 0 );
+                    if (foundMiley) { // found Milley ! :)
+                        var list = $.map(miley.albumNames, function(elm){ return '<li>' + elm + '</li>'; });
+                        $('body').append($('<ol></ol>').html(list));
+                        clearInterval(waitForMilleyAgain);
+                    };
+                    if ( count > 10 ) { // can't find Milley :(
+                        clearInterval(waitForMilleyAgain);
+                        throw 'there is no Milley :(';
+                    };
+                    count++;
+                }
+                var  waitForMilleyAgain = setInterval( waitForMilley, 500);
+            });
+        </script>
+    </body>
+</html>

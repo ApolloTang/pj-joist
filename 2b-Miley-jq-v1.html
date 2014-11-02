@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Task 2b</title>
+</head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+function getMileyAlbumNames() {
+    var self = {
+        albumNames : []
+        , SortAlphabetically : function(a,b) {
+              var aName = a.toLowerCase();
+              var bName = b.toLowerCase(); 
+              return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+        }
+    };
+
+    var req = $.ajax({
+        context: self,
+        url: 'https://itunes.apple.com/lookup?id=137057909&entity=album',
+        dataType: 'jsonp',
+        success: function(data){  
+           this.albumNames = $.map(data.results, function(obj){ return obj['collectionName']; });
+           this.albumNames.sort(this.SortAlphabetically);
+        }
+    });
+
+    var count = 0;
+    var waitForMilley = function() {
+        var done = (self.albumNames.length > 0 );
+        if (done) {
+            // found Milley ! :) 
+            clearInterval(waitForMilleyAgain);
+        };
+        if ( count > 10 ) {
+            clearInterval(waitForMilleyAgain);
+            throw 'there is no Milley :(';
+        };
+        count++;
+        console.log(count, self.albumNames)
+    return self.albumName;
+    }
+    var  waitForMilleyAgain = setInterval( waitForMilley, 500);
+
+};
+
+
+result = getMileyAlbumNames();
+
+console.log(result);
+
+
+
+});
+
+
+
+
+</script>
+</body>
+</html>

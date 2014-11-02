@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            * {padding:0; margin:0;}
+            #container{
+                font-family:monospace;
+                font-weight:bold;
+                position:absolute; top:10px; left:10px
+            }
+            .navbar ul {
+                border-bottom:1px hsl(0,0%,60%) solid;
+            }
+            .navbar li {
+                float:left;
+                list-style-type:none; list-style-position:outside;
+            }
+            .navbar li a {
+                float:left; height:55px; padding:0px 10px; line-height:55px; 
+                background-color:hsl(0,0%,80%); text-decoration:none; color:hsl(0,0%,0%);
+            }
+            .navbar li a:hover {
+                color:hsl(117,54%,38%);
+            }
+            .navbar li:last-child a {
+                padding-right:20px;
+            }
+            .navbar li:first-child a {
+                padding-left:20px;
+            }
+            .clearfix:after {
+                content:"."; display:block; height:0; clear:both; visibility:hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+        <script>
+            var navStructure = '<nav class="navbar" role="navigation">'
+                             +    '<ul class="navbar-nav clearfix"></ul>'
+                             + '</nav>';
+            $("#container").html(navStructure);
+            _.each(['Link1', 'Link2', 'Link3'], function(item){
+                var list = '<li><a href="#">'+ item + '</a></li>';
+                $('.navbar ul').append(list);
+                });
+            $('.navbar li:first').addClass('active');
+        </script>
+    </body>
+</html>

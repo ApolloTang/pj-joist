@@ -1,7 +1,6 @@
 <html>
     <head>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
-
         <style>
             * {
                 margin:0; padding:0;
@@ -28,7 +27,7 @@
             .widget-body {
                 background-color: rgb(255,255,255);
                 width: 100%;
-                padding-bottom: 40px;
+                padding-bottom: 55px;
                 -webkit-border-radius: 0px 0px 6px 6px;
                 -moz-border-radius: 0px 0px 6px 6px;
                 border-radius: 0px 0px 6px 6px;
@@ -55,13 +54,6 @@
                 width:150px; 
                 margin:0 auto;
             }
-            .pieChart-legend-container {
-                border-top: 1px solid red;
-                padding-top: 10px;
-
-                width: 280px;
-               margin: 0 auto;               width: 100%;
-            }
             h1 {
                 font-size: 1.7em; line-height: 1;
                 color: rgb(255,255,255);
@@ -83,41 +75,56 @@
                 font-weight: 100;
                 color: rgb(90,104,107);
             }
-            .legend-collection {
-               outline: 1px red solid; 
-               /* width: 280px; */
-               /* margin: 0 auto; */
+            .hrule {
+                background-color: rgb(244,244,244);
+                width: 100%;
+                height: 1px;
+            }
+            .pieChart-legend-container {
+                border-top: 1px solid rgb(244,244,244);
+                margin: 0 auto;
+                width: 280px;
+            }
+            ul.legend-collection {
+                margin: 0 auto;
+                margin-top: 20px;
             }
             .legend-collection li {
                 list-style-type: none;
-               outline: 1px green solid; 
-               width: 280px;
-               margin: 0 auto;
-               background-color: #aeaeae;
+                width: 280px;
             }
             .c {
-                border: 1px blue solid;
                 float: left;
+                line-height: 2.1;
+                font-size: 1.3em;
             }
             .c1 {
                 display: inline-block;
-                width: 10px;
-                height: 10px;
+                width: 14px;
+                height: 14px;
                 background-color: red;
-                margin: 5px;
-                }
+                margin-left: 2px;
+                margin-top: 14px;
+                margin-right: 0px;
+            }
             .c2 {
-                width: 190px;
-                padding-left:10px;
+                color: rgb(130,141,143);
+                width: 184px;
+                padding-left:23px;
             }
             .c3 {
-                width: 50px;
+                color: rgb(185,185,185);
+                width: 57px;
                 text-align:right;
             }
+            .item-1 .c1 { background-color: rgb(119,198,228)}
+            .item-2 .c1 { background-color: rgb(001,205,009)}
+            .item-3 .c1 { background-color: rgb(225,227,073)}
+            .item-4 .c1 { background-color: rgb(255,137,091)}
+            .item-5 .c1 { background-color: rgb(125,148,190)}
             .clearfix:after {
                 content:"."; display:block; height:0; clear:both; visibility:hidden;
             }
-
         </style>
     </head>
     <body>
@@ -140,36 +147,32 @@
                     </div>
                 </div>
                 <div class="pieChart-legend-container">
+                    <div class="hrule"></div>
                     <ul class="legend-collection">
-                        <li class="clearfix">
+                        <li class="clearfix item-1">
                             <span class="c c1"></span>
                             <span class="c c2">Pizza</span>
                             <span class="c c3">40%</span>
                         </li>
-                        <li class="clearfix">
+                        <li class="clearfix item-2">
                             <span class="c c1"></span>
-                            <span class="c c2">Pizza</span>
-                            <span class="c c3">40%</span>
+                            <span class="c c2">Hamburgers</span>
+                            <span class="c c3">8%</span>
                         </li>
-                        <li class="clearfix">
+                        <li class="clearfix item-3">
                             <span class="c c1"></span>
-                            <span class="c c2">Pizza</span>
-                            <span class="c c3">40%</span>
+                            <span class="c c2">Bacon</span>
+                            <span class="c c3">15%</span>
                         </li>
-                        <li class="clearfix">
+                        <li class="clearfix item-4">
                             <span class="c c1"></span>
-                            <span class="c c2">Pizza</span>
-                            <span class="c c3">40%</span>
+                            <span class="c c2">Apple Pie</span>
+                            <span class="c c3">25%</span>
                         </li>
-                        <li class="clearfix">
+                        <li class="clearfix item-5">
                             <span class="c c1"></span>
-                            <span class="c c2">Pizza</span>
-                            <span class="c c3">40%</span>
-                        </li>
-                        <li class="clearfix">
-                            <span class="c c1"></span>
-                            <span class="c c2">Pizza</span>
-                            <span class="c c3">40%</span>
+                            <span class="c c2">Small children</span>
+                            <span class="c c3">12%</span>
                         </li>
                     </ul>
                 </div>
